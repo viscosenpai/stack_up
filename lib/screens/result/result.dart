@@ -31,7 +31,7 @@ class _ResultState extends State<Result> {
       body: Stack(),
       //specify the location of the FAB
       // FABの場所を指定します
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: "Stack",
@@ -51,7 +51,10 @@ class _ResultState extends State<Result> {
                 onPressed: () {},
                 icon: const Icon(Icons.home),
               ),
-              const SizedBox(),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.home),
+              ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.home),
@@ -64,7 +67,7 @@ class _ResultState extends State<Result> {
         shape: const CircularNotchedRectangle(),
         // color of the BottomAppBar
         // BottomAppBarの色
-        color: Colors.white,
+        color: Colors.blueGrey,
       ),
     );
   }
