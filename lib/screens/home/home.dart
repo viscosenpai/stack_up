@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stack_up/screens/result/result.dart';
+import 'package:stack_up/widgets/bottom_nav_bar.dart';
 import 'package:stack_up/constants/tab_item.dart';
 
 class Home extends StatefulWidget {
@@ -29,7 +31,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text(tabName[currentTab].toString())),
+      body: Stack(
+        children: <Widget>[
+          Offstage(
+            offstage: currentTab != TabItem.ruleset,
+            child: Center(
+              child: Text(tabName[currentTab].toString()),
+            ),
+          ),
+          Offstage(
+            offstage: currentTab != TabItem.result,
+            child: Result(),
+          ),
+          Offstage(
+            offstage: currentTab != TabItem.gamestuts,
+            child: Center(
+              child: Text(tabName[currentTab].toString()),
+            ),
+          ),
+        ],
+      ),
       //specify the location of the FAB
       // FABの場所を指定します
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -46,50 +67,6 @@ class _HomeState extends State<Home> {
         currentTab: currentTab,
         onSelectTab: _updateTabSelection,
       ),
-    );
-  }
-}
-
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({
-    Key? key,
-    required this.currentTab,
-    required this.onSelectTab,
-  }) : super(key: key);
-  final TabItem currentTab;
-  final void Function(TabItem) onSelectTab;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.blueGrey,
-      type: BottomNavigationBarType.fixed,
-      onTap: (index) => onSelectTab(TabItem.values[index]),
-      currentIndex: currentTab.index,
-      selectedItemColor: Colors.white,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: const Icon(
-            Icons.home,
-            color: Colors.white,
-          ),
-          label: tabName[TabItem.ruleset],
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            Icons.home,
-            color: Colors.white,
-          ),
-          label: tabName[TabItem.result],
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            Icons.home,
-            color: Colors.white,
-          ),
-          label: tabName[TabItem.gamestuts],
-        ),
-      ],
     );
   }
 }
